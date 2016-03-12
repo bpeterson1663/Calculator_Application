@@ -2,7 +2,7 @@ var num1 = "0";
 var num2 = "0";
 var currentNumber = "0";
 var operation = "";
-var allData = [];
+var allData = {};
 var finalAnswer = "";
 
 $(document).ready(function(){
@@ -17,9 +17,10 @@ $(document).ready(function(){
 });
 //append a DIV as the Display of the calculator that we will append the numbers to as a string
 function showDisplay(){
-  $('.calculator').append('<div class="display"></div>');
-  $('.calculator').append('<div class="numberOne">First Number value: <span></span></div>');
-  $('.calculator').append('<div class="numberTwo">Second Number value: <span></span></div>');
+  $('.container').append('<div class="display"></div>');
+  $('.container').append('<div class="numberOne">First Number value: <span></span></div>');
+  $('.container').append('<div class="numberTwo">Second Number value: <span></span></div>');
+  $('.container').append('<div class="calculatedNumber">Calculated Number: <span></span></div>');
   $('.display').text(currentNumber);
 
 }
@@ -28,10 +29,15 @@ function loadNumPad(){
 
   $('.calculator').append('<div class="numPad"></div>');
 
-  for(var i = 0; i < 10; i++){
+  for(var i = 1; i < 10; i++){
     $('.numPad').append('<button class="btn btn'+i+'">'+i+'</button>');
     $('.btn'+i).data('buttonValue',i);
   }
+    $('.numPad').append('<button class="btn btn0">0</button>');
+    $('.btn0').data('buttonValue',0);
+    $('.btn3').after('<br/>');
+    $('.btn6').after('<br/>');
+    $('.btn9').after('<br/>');
 };
 
 //load the operator buttons
@@ -69,7 +75,8 @@ function operatorClicked(){
   $('.display').text(currentNumber);
   operation = $(this).data('operator');
   $('.numberOne span').text(num1);
-  allData.push(num1,operation);
+  allData.num1 = num1;
+  allData.operation = operation;
   num1 = "0";
 
 }
@@ -82,7 +89,7 @@ function equalClicked(){
   $('.display').text(currentNumber);
   $('.numberTwo span').text(num2);
   console.log("num2 is: ", num2);
-  allData.push(num2);
+  allData.num2 = num2;
   console.log("All information is: ", allData);
   //Start Here
   $.ajax({
@@ -90,9 +97,17 @@ function equalClicked(){
     url: '/operation',
     data: allData
   });
-
-
-
+  $.ajax({
+    type: 'GET',
+    url: '/calculatedValue',
+    success: function(data){
+      appendCalculatedValue(data);
+      console.log("returned calculated value is: ", data);
+    }
+  });
   num2 = "0";
 
+}
+function appendCalculatedValue(data){
+  $('.calculatedNumber span').text(data);
 }
