@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var $ = require('jQuery');
 
 var path = require('path');
 var num1;
