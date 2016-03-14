@@ -94,43 +94,40 @@ function equalClicked(){
   currentNumber = "0";
   $('.display').text(currentNumber);
   $('.numberTwo span').text(num2);
+  console.log("num1 is: ", num1);
   console.log("num2 is: ", num2);
   allData.num2 = num2;
   console.log("All information is: ", allData);
-  //Start Here
   $.ajax({
     type: 'POST',
     url: '/operation',
-    data: allData
-  });
-  $.ajax({
-    type: 'GET',
-    url: '/calculatedValue',
+    data: allData,
     success: function(data){
-      appendCalculatedValue(data);
+      finalAnswer = data;
+      appendCalculatedValue();
       //console.log("returned calculated value is: ", data);
     }
   });
-  num2 = "0";
 
 }
-function appendCalculatedValue(data){
-  console.log("The data being returned: ", data);
-  finalAnser = data;
-  console.log("My final answer is: " ,finalAnswer);
-  $('.calculatedNumber span').text(data);
+function appendCalculatedValue(){
+  console.log("The data being returned: ", finalAnswer);
+  $('.calculatedNumber span').text(finalAnswer);
 }
 
 function resetValues(){
   currentNumber ="0";
-  $('.calculatedNumber span').text("0");
-  $('.numberTwo span').text("0");
+  allData.num1 = "0";
+  num2 = "0";
+  finalAnswer = "0";
+  $('.calculatedNumber span').text(finalAnswer);
+  $('.numberTwo span').text(num2);
   $('.operatorValue span').text("");
-  $('.numberOne span').text("0");
-  $('.display').text("0");
+  $('.numberOne span').text(num1);
+  $('.display').text(currentNumber);
 }
 
 function clearValue(){
   currentNumber ="0";
-  $('.display').text("0");
+  $('.display').text(currentNumber);
 }

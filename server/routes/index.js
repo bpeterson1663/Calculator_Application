@@ -13,33 +13,29 @@ router.post("/operation", function(req, res){
   num1 = parseInt(data.num1);
   num2 = parseInt(data.num2);
   operation = data.operation;
-  console.log("num1 is: ", num1);
-  console.log("num2 is: ", num2);
-  console.log("operation is: ", operation);
+
   if(operation == "multiply"){
     calculatedValue = num1*num2;
-    //res.sendStatus(calculatedValue);
+    res.send(calculatedValue.toString());
   }
   else if(operation == "divide"){
     calculatedValue = num1/num2;
-    //res.sendStatus(calculatedValue);
+    res.send(calculatedValue.toString());
   }
   else if(operation == "add"){
     calculatedValue = num1 + num2;
-    //res.sendStatus(calculatedValue);
+    res.send(calculatedValue.toString());
   }
   else if(operation == "subtract"){
     calculatedValue = num1 - num2;
-    //res.sendStatus(calculatedValue);
-  }
-  //res.send(console.log("confirmed"));
-});
-
-router.get("/calculatedValue", function(req, res){
-
     res.send(calculatedValue.toString());
-
+  }
+  else if(num1 == 0 && num2 == 0){
+    calculatedValue = 0;
+    res.send(calculatedValue.toString());
+  }
 });
+
 
 router.get("/*", function(req, res){
    var file = req.params[0] || 'views/index.html';
