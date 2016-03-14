@@ -7,13 +7,15 @@ var num2;
 var operation;
 
 var calculatedValue = 0;
-
+//ajax request route
 router.post("/operation", function(req, res){
+  //seperate out data values into variables
   var data = req.body;
   num1 = parseFloat(data.num1);
   num2 = parseFloat(data.num2);
   operation = data.operation;
-
+  //check which operation is being done and perform operation on both numbers
+  //send the data back down to the client
   if(operation == "multiply"){
     calculatedValue = num1*num2;
     res.send(calculatedValue.toString());
