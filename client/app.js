@@ -13,14 +13,16 @@ $(document).ready(function(){
   $('.numPad').on('click', 'button', numClick);
   $('.calculator').on('click', '.operator', operatorClicked);
   $('.calculator').on('click', '.equal', equalClicked);
+  $('.calculator').on('click', '.reset', resetValues);
+  $('.calculator').on('click', '.clear', clearValue);
   console.log(num1);
 });
 //append a DIV as the Display of the calculator that we will append the numbers to as a string
 function showDisplay(){
-  $('.container').append('<div class="display"></div>');
-  $('.container').append('<div class="numberOne">First Number value: <span></span></div>');
-  $('.container').append('<div class="numberTwo">Second Number value: <span></span></div>');
-  $('.container').append('<div class="calculatedNumber">Calculated Number: <span></span></div>');
+  $('.results').append('<div class="numberOne">First Number value: <span>0</span></div>');
+  $('.results').append('<div class="operatorValue">Operation: <span></span></div>');
+  $('.results').append('<div class="numberTwo">Second Number value: <span>0</span></div>');
+  $('.results').append('<div class="calculatedNumber">Calculated Number: <span>0</span></div>');
   $('.display').text(currentNumber);
 
 }
@@ -30,10 +32,10 @@ function loadNumPad(){
   $('.calculator').append('<div class="numPad"></div>');
 
   for(var i = 1; i < 10; i++){
-    $('.numPad').append('<button class="btn btn'+i+'">'+i+'</button>');
+    $('.numPad').append('<button class="btn btn'+i+' btn-info active">'+i+'</button>');
     $('.btn'+i).data('buttonValue',i);
   }
-    $('.numPad').append('<button class="btn btn0">0</button>');
+    $('.numPad').append('<button class="btn btn0 btn-info active">0</button>');
     $('.btn0').data('buttonValue',0);
     $('.btn3').after('<br/>');
     $('.btn6').after('<br/>');
@@ -44,20 +46,23 @@ function loadNumPad(){
 function loadOperatorPad(){
   $('.calculator').append('<div class="operatorPad"></div>')
 
-  $('.operatorPad').append('<button class="btn operator multiply"> * </button>');
+  $('.operatorPad').append('<button class="btn operator multiply btn-info active"> x </button>');
   $('.multiply').data('operator', "multiply");
 
-  $('.operatorPad').append('<button class="btn operator divide"> / </button>');
+  $('.operatorPad').append('<button class="btn operator divide btn-info active"> &divide; </button>');
   $('.divide').data('operator', "divide");
 
-  $('.operatorPad').append('<button class="btn operator subtract"> - </button>');
+  $('.operatorPad').append('<button class="btn operator subtract btn-info active"> &ndash; </button>');
   $('.subtract').data('operator', "subtract");
 
-  $('.operatorPad').append('<button class="btn operator add"> + </button>');
+  $('.operatorPad').append('<button class="btn operator add btn-info active"> + </button>');
   $('.add').data('operator', "add");
 
-  $('.operatorPad').append('<button class="btn equal"> = </button>');
+  $('.calculator').append('<div class="equalDiv"></div>')
+  $('.equalDiv').append('<button class="btn equal btn-info active"> = </button>');
+  $('.equalDiv').append('<button class="btn reset btn-info active">Reset</button>');
   $('.equal').data('equal', "equal");
+  $('.equalDiv').append('<button class="btn clear btn-info active">Clear</button>');
 }
 //create event listener function for one the number buttons are pressed pulling the value from the data and concantinating it each time
 function numClick(){
@@ -75,6 +80,7 @@ function operatorClicked(){
   $('.display').text(currentNumber);
   operation = $(this).data('operator');
   $('.numberOne span').text(num1);
+  $('.operatorValue span').text(operation);
   allData.num1 = num1;
   allData.operation = operation;
   num1 = "0";
@@ -102,12 +108,29 @@ function equalClicked(){
     url: '/calculatedValue',
     success: function(data){
       appendCalculatedValue(data);
-      console.log("returned calculated value is: ", data);
+      //console.log("returned calculated value is: ", data);
     }
   });
   num2 = "0";
 
 }
 function appendCalculatedValue(data){
+  console.log("The data being returned: ", data);
+  finalAnser = data;
+  console.log("My final answer is: " ,finalAnswer);
   $('.calculatedNumber span').text(data);
+}
+
+function resetValues(){
+  currentNumber ="0";
+  $('.calculatedNumber span').text("0");
+  $('.numberTwo span').text("0");
+  $('.operatorValue span').text("");
+  $('.numberOne span').text("0");
+  $('.display').text("0");
+}
+
+function clearValue(){
+  currentNumber ="0";
+  $('.display').text("0");
 }
