@@ -31,8 +31,8 @@ router.post("/operation", function(req, res){
   else if(operation == "subtract"){
     calculatedValue = num1 - num2;
     res.send(calculatedValue.toString());
-  }
-  else if(num1 == 0 && num2 == 0){
+  }//catch if someone presses equal when no values are set 
+  else if(num1 === 0 && num2 == 0){
     calculatedValue = 0;
     res.send(calculatedValue.toString());
   }
