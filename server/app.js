@@ -6,6 +6,8 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use("/",index);
 
-app.listen(3000, function() {
+app.set("port", (process.env.port || 3000));
+
+app.listen(app.get("port"), function() {
 console.log("Listening on port: 3000");
 });
