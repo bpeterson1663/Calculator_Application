@@ -10,8 +10,8 @@ var calculatedValue = 0;
 
 router.post("/operation", function(req, res){
   var data = req.body;
-  num1 = parseInt(data.num1);
-  num2 = parseInt(data.num2);
+  num1 = parseFloat(data.num1);
+  num2 = parseFloat(data.num2);
   operation = data.operation;
 
   if(operation == "multiply"){

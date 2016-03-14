@@ -37,6 +37,8 @@ function loadNumPad(){
   }
     $('.numPad').append('<button class="btn btn0 btn-info active">0</button>');
     $('.btn0').data('buttonValue',0);
+    $('.numPad').append('<button class="btn btnDecimal btn-info active">.</button>');
+    $('.btnDecimal').data('buttonValue','.');
     $('.btn3').after('<br/>');
     $('.btn6').after('<br/>');
     $('.btn9').after('<br/>');
