@@ -8,6 +8,6 @@ app.use("/",index);
 
 app.set("port", (process.env.port || 3000));
 
-app.listen(app.get("port"), function() {
+app.listen(app.set("port"), function() {
 console.log("Listening on port: 3000");
 });
