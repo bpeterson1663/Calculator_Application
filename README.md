@@ -1,5 +1,8 @@
-# calculator_application
-Welcome to your third weekend challenge!
+# Calculator Application
+
+http://fast-harbor-72112.herokuapp.com/
+
+Prime Digital Academy Assignment
 
 We are going to be building a calculator application using jQuery, Node, and Express, all hosted on Heroku!
 
