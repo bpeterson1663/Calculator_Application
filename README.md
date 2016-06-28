@@ -1,8 +1,12 @@
 # Calculator Application
 
-https://fast-bayou-78724.herokuapp.com/
+This was one of our weekend challenges we had at Prime Digital Academy. It was to create a basic calculator that would take in two numbers and peform basic mathematical operations on them. 
 
-Prime Digital Academy Assignment
+Click below to see view the application on my portfolio page
+
+http://bradyjpeterson.com/portfolio/calculator-application/
+
+##Directions
 
 We are going to be building a calculator application using jQuery, Node, and Express, all hosted on Heroku!
 
